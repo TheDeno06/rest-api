@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "rest-api",
+      "path": "../..",
+    },
+    {
+      "name": "payment-service1",
+      "path": "../../../payment-service1",
+    },
+    {
+      "name": "rules-engine",
+      "path": "../../../rules-engine",
+    },
+  ],
+}
