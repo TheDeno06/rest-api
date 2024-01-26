@@ -2,7 +2,7 @@ import { PaymentMethod } from './dtos/payment-request-body.dto';
 
 export class PaymentCreatedEvent {
   constructor(
-    public readonly paymentId,
+    public readonly paymentId: string,
     public readonly paymentMethod: PaymentMethod,
     public readonly paymentDetails: {},
   ) {}

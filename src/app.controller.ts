@@ -14,6 +14,7 @@ export class AppController {
   @Post('/api/payment')
   async createPayment(@Body() paymentRequestBody: PaymentRequestBodyDto) {
     const result = await this.appService.paymentCreate(paymentRequestBody);
+    console.log(paymentRequestBody);
     return result;
   }
 }
