@@ -2,12 +2,12 @@ import { Type } from 'class-transformer';
 import {
   IsDateString,
   IsEnum,
+  IsIBAN,
   IsNotEmpty,
   IsNumber,
   IsObject,
   IsString,
   Length,
-  MinLength,
   ValidateNested,
 } from 'class-validator';
 
@@ -65,7 +65,7 @@ class PayeeDetails {
   @IsString()
   fullName: string;
 
-  @IsString()
+  @IsIBAN()
   iban: string;
 }
 
@@ -95,7 +95,6 @@ export class PaymentRequestBodyDto {
   @IsNotEmpty()
   paymentMethod: PaymentMethod;
 
-  @IsObject()
   @ValidateNested()
   @Type(() => PaymentDetails)
   paymentDetails: PaymentDetails;

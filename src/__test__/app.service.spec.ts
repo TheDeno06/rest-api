@@ -1,11 +1,26 @@
-import { TestingModule } from '@nestjs/testing';
-import { AppService } from 'src/app.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppService } from '../app.service';
+import { Logger } from '@nestjs/common';
+import { PaymentRequestBodyDto } from 'src/dtos/payment-request-body.dto';
 
 describe('AppService', () => {
   let app: TestingModule;
   let appService: AppService;
+  const logger: Logger = new Logger('AppService tests');
 
-  it('should be defined', () => {
+  beforeAll(async () => {
+    app = await Test.createTestingModule({
+      providers: [
+        AppService,
+        { provide: 'PAYMENT_SERVICE', useValue: { emit: jest.fn() } },
+      ],
+    }).compile();
+    app.useLogger(logger);
+
+    appService = app.get(AppService);
+  });
+
+  it('should be defined', async () => {
     expect(app).toBeDefined();
     expect(appService).toBeDefined();
   });
@@ -16,7 +31,19 @@ describe('AppService', () => {
     });
   });
 
-  describe('paymentCreate', () => {
-    it('should create a payment request', async () => {});
+  enum PaymentMethod {
+    MASTERCARD = 'MASTERCARD',
+    VISA = 'VISA',
+  }
+
+  // describe('paymentCreate', () => {
+  it('should create a payment request', async () => {
+    let paymentMethod: PaymentMethod;
+    let paymentDetails = {};
+    const payment = await appService.paymentCreate({
+      paymentMethod,
+      // paymentDetails,
+    });
   });
+  // });
 });
